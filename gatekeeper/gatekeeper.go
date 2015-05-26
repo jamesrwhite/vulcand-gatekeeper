@@ -1,4 +1,4 @@
-// A distributed rate limit implementation for vulcand
+// An authentication and distributed rate limit middleware for vulcand
 package gatekeeper
 
 import (
@@ -18,8 +18,7 @@ import (
 
 const Type = "gatekeeper"
 
-// GatekeeperMiddleware struct holds configuration parameters and is used to
-// serialize/deserialize the configuration from storage engines.
+// GatekeeperMiddleware holds configuration parameters and API keys for the middleware
 type GatekeeperMiddleware struct {
 	Header   string
 	Frontend string
@@ -35,7 +34,6 @@ type GatekeeperClient struct {
 	Bucket         *ratelimit.Bucket
 }
 
-// Auth middleware handler
 type GatekeeperHandler struct {
 	config GatekeeperMiddleware
 	next   http.Handler
